@@ -1,0 +1,71 @@
+<div class="card" th:fragment="table">
+    <div class="card-header">
+        <h3 class="card-title">Quản lý sự kiện</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered
+                          table-striped">
+            <div style="width: 10%;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm
+                </button>
+            </div>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tình trạng</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Ghi chú</th>
+                    <th>Tổng hóa đơn</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="transaction : ${transactionList}">
+                    <tr>
+                        <td>[[${transaction.id}]]</td>
+                        <td>[[${transaction.user.name}]]</td>
+                        <td>[[${transaction.status}]]</td>
+                        <td>[[${transaction.payment}]]</td>
+                        <td>[[${transaction.message}]]</td>
+                        <td>[[${transaction.amount}]]</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
+                                onclick="fillEditForm(this)">Sửa
+                            </button>
+                            <button type="button" class="btn btn-danger delete" th:data-id="${transaction.id}"
+                                onclick="confirmRemoval(this)"> Xóa
+                            </button>
+                        </td>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tình trạng</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Ghi chú</th>
+                    <th>Tổng hóa đơn</th>
+                    <th>Chức năng</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <input type="hiden" style="display: none;" name="" id="action" value="Add">
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+</div>
