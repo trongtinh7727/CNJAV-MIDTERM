@@ -1,5 +1,6 @@
 package com.iiex.lab7_lt.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "user")
 public class User {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -29,10 +29,14 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @ToString.Exclude
   private Collection<Transaction> transactions;
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @EqualsAndHashCode.Exclude
+  @ToString.Exclude
+  @JsonIgnore
   @JoinTable(
     name = "users_roles",
     joinColumns = {

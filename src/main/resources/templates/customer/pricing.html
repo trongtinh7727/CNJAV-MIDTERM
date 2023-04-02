@@ -179,7 +179,6 @@
     <div th:insert="/layouts/nav::nav"></div>
     <!-- End Navbar -->
     <div class="wrapper">
-
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -191,7 +190,9 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="card-body">
+                                <input type="hidden" id="transactionID" th:value="${transaction.id}">
                                 <div class="table-responsive">
+
                                     <table class="table table-shopping">
                                         <thead class="">
                                             <tr>
@@ -218,65 +219,104 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <th:block th:each="order : ${transaction.getOrders()}">
+                                            <th:block th:each="order : ${transaction.getOrders()}">
+                                                <tr th:id="${order.id}">
+                                                    <td>
+                                                        <div class="img-container">
+                                                            <img th:src="${order.product.img_links}" alt="...">
+                                                        </div>
+                                                    </td>
+                                                    <td class="td-name">
+                                                        <a
+                                                            th:href="@{/product?id={id}(id=${order.product.id})}">[[${order.product.name}]]</a>
+                                                        <br>
+                                                        <small>[[${order.product.content}]]</small>
+                                                    </td>
+                                                    <td>
+                                                        Black
+                                                    </td>
+                                                    <td>
+                                                        Oversize
+                                                    </td>
+                                                    <td class="td-number">
+                                                        <small>€</small>
+                                                        <span id="price">[[${order.product.price}]]</span>
+                                                    </td>
+                                                    <td class="td-number">
+                                                        <span id="quantity"> [[${order.quantity}]]</span>
+                                                        <div class="btn-group">
+
+                                                            <button type="button" class="btn btn-info btn-sm"
+                                                                th:id="'order-des-btn-' + ${order.id}">
+                                                                <i class="now-ui-icons ui-1_simple-delete"></i>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-info btn-sm"
+                                                                th:id="'order-increase-btn-' + ${order.id}">
+                                                                <i class="now-ui-icons ui-1_simple-add"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="td-number">
+                                                        <small>€</small> <span id="amount">[[${order.price}]]</span>
+                                                    </td>
+                                                    <td class="td-actions">
+                                                        <button type="button" rel="tooltip" data-placement="left"
+                                                            title="" class="btn btn-neutral"
+                                                            th:id="'order-delete-btn-' + ${order.id}"
+                                                            data-original-title="Remove item">
+                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
                                             <tr>
-                                                <td>
-                                                    <div class="img-container">
-                                                        <img th:src="${order.product.img_links}" alt="...">
-                                                    </div>
+                                                <td colspan="5">
                                                 </td>
-                                                <td class="td-name">
-                                                    <a th:href="@{/product?id={id}(id=${order.product.id})}">[[${order.product.name}]]</a>
-                                                    <br>
-                                                    <small>[[${order.product.content}]]</small>
+                                                <td class="td-total">
+                                                    Total
                                                 </td>
-                                                <td>
-                                                    Black
-                                                </td>
-                                                <td>
-                                                    Oversize
-                                                </td>
-                                                <td class="td-number">
-                                                    <small>€</small>[[${order.product.price}]]
-                                                </td>
-                                                <td class="td-number">
-                                                    [[${order.quantity}]]
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-info btn-sm"> <i
-                                                                class="now-ui-icons ui-1_simple-delete"></i> </button>
-                                                        <button class="btn btn-info btn-sm"> <i
-                                                                class="now-ui-icons ui-1_simple-add"></i> </button>
-                                                    </div>
-                                                </td>
-                                                <td class="td-number">
-                                                    <small>€</small>[[${order.price}]]
-                                                </td>
-                                                <td class="td-actions">
-                                                    <button type="button" rel="tooltip" data-placement="left" title=""
-                                                            class="btn btn-neutral" data-original-title="Remove item">
-                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                    </button>
+                                                <td class="td-price">
+                                                    <small>€</small><span id="total">[[${transaction.amount}]]</span>
                                                 </td>
                                             </tr>
-                                        </th:block>
-                                        <tr>
-                                            <td colspan="3">
-                                            </td>
-                                            <td class="td-total">
-                                                Total
-                                            </td>
-                                            <td class="td-price">
-                                                <small>€</small>[[${transaction.amount}]]
-                                            </td>
-                                            <td colspan="3" class="text-right">
-                                                <button type="button" rel="tooltip" class="btn btn-info btn-round " data-original-title="" title="">
-                                                    Complete Purchase
-                                                    <i class="now-ui-icons arrows-1_minimal-right"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="row">
+                                    <p class="category">Địa chỉ giao hàng</p>
+                                    <div class="col-sm-8 col-lg-12">
+                                        <div class="input-group">
+                                            <input id="address" type="text" class="form-control"
+                                                placeholder="Right Nucleo Icon" th:value="${userAdress}">
+                                            <span class="input-group-addon">
+                                                <i class="now-ui-icons users_single-02"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="checkout">
+                                    <div class="" style="float: left;">
+                                        <p class="category">Chọn phương thức thanh toán</p>
+                                        <div class="form-check form-check-radio disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="exampleRadios1"
+                                                    id="exampleRadios2" value="option3" disabled="">
+                                                <span class="form-check-sign"></span>
+                                                ATM | Ví điện tử
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="exampleRadios1"
+                                                    id="exampleRadios2" value="option4" disabled="" checked="">
+                                                <span class="form-check-sign"></span>
+                                                Thanh toán khi nhận hàng
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-info" id="checkout">Đặt
+                                            hàng</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +324,125 @@
                 </div>
             </div>
         </div>
-
         <div th:insert="/layouts/footer :: footer"></div>
     </div>
+    <script>
+        $(function () {
+            $('button[id^="order-increase-btn-"]').click(function () {
+                var orderRow = $(this).closest('tr');
+                var priceElem = orderRow.find('#amount');
+                var quantityElem = orderRow.find('#quantity');
+                var totalElem = $('#total');
+                var price = parseInt(orderRow.find('#price').text());
+                var quantity = parseInt(orderRow.find('#quantity').text());
+                var newPrice = price * (quantity + 1);
+                var newTotal = parseInt(totalElem.text()) + price;
+                priceElem.text(newPrice.toFixed(2));
+                quantityElem.text((quantity + 1));
+                totalElem.text(newTotal);
+
+                const updateOder = {
+                    quantity: quantity + 1,
+                    price: newPrice
+                };
+
+                fetch('/api/orders/' + orderRow.attr('id'), {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updateOder)
+                })
+                    .then(response => response.json())
+                    .then(updateOder => {
+                        console.log(updateOder);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            });
+
+            $('button[id^="order-des-btn-"]').click(function () {
+                var orderRow = $(this).closest('tr');
+                var priceElem = orderRow.find('#amount');
+                var quantityElem = orderRow.find('#quantity');
+                var totalElem = $('#total');
+                var price = parseInt(orderRow.find('#price').text());
+                var quantity = parseInt(orderRow.find('#quantity').text());
+                if (quantity > 1) {
+                    var newPrice = price * (quantity - 1);
+                    var newTotal = parseInt(totalElem.text()) - price;
+                    priceElem.text(newPrice.toFixed(2));
+                    quantityElem.text((quantity - 1));
+                    totalElem.text(newTotal);
+
+                    const updateOder = {
+                        quantity: quantity - 1,
+                        price: newPrice
+                    };
+
+                    fetch('/api/orders/' + orderRow.attr('id'), {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updateOder)
+                    })
+                        .then(response => response.json())
+                        .then(updateOder => {
+                            console.log(updateOder);
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        });
+                }
+            });
+
+            $('button[id^="order-delete-btn-"]').click(function () {
+                var orderRow = $(this).closest('tr');
+                console.log(orderRow.attr('id'));
+                var priceElem = orderRow.find('#amount');
+                var totalElem = $('#total');
+                var newTotal = parseInt(totalElem.text()) - parseInt(priceElem.text());
+                totalElem.text(newTotal);
+                fetch('/api/orders/' + orderRow.attr('id'), {
+                    method: 'DELETE'
+                })
+                    .then(() => {
+                        orderRow.remove();
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            });
+
+            $('#checkout').click(function () {
+                var msg = $('#address').val();
+                var id = $('#transactionID').val();
+                const transactionUpdate = {
+                    message: msg
+                };
+
+                fetch('/api/transactions/' + id, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(transactionUpdate)
+                })
+                    .then(response => response.json())
+                    .then(transactionUpdate => {
+                        console.log(transactionUpdate);
+                        window.location.replace("./paymentsuccess");
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            })
+
+
+
+        });
+    </script>
 </body>

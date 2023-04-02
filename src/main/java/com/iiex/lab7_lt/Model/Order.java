@@ -3,6 +3,7 @@ package com.iiex.lab7_lt.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
 @Table(name = "`order`")
 @Data
@@ -24,7 +25,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "transaction_id")
-    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Transaction transaction;
 }

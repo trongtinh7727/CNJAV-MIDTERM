@@ -1,7 +1,9 @@
 package com.iiex.lab7_lt.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
 
 import java.util.Collection;
 
@@ -20,6 +22,8 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @JsonIgnore
+
     private Collection<User> users;
 
 }

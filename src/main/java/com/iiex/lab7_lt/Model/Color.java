@@ -1,7 +1,9 @@
 package com.iiex.lab7_lt.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
 
 import java.util.Collection;
 
@@ -15,9 +17,11 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String code;
 
     @ManyToMany(mappedBy = "colors")
-    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @JsonIgnore
     private Collection<Product> products;
 }

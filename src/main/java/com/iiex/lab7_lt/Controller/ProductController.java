@@ -1,10 +1,14 @@
 package com.iiex.lab7_lt.Controller;
 
+import com.iiex.lab7_lt.Model.Color;
 import com.iiex.lab7_lt.Model.Product;
 import com.iiex.lab7_lt.Repository.BrandRepository;
 import com.iiex.lab7_lt.Repository.CategoryRepository;
+import com.iiex.lab7_lt.Repository.ColorRepository;
 import com.iiex.lab7_lt.Repository.ProductRepository;
 import jakarta.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,9 @@ public class ProductController {
   @Autowired
   private BrandRepository brandRepository;
 
+  @Autowired
+  private ColorRepository colorRepository;
+
   @GetMapping("/products")
   public String showproducts(Model model) {
     List<Product> productList = productRepository.findAll();
@@ -36,11 +43,15 @@ public class ProductController {
     model.addAttribute("prefix", "product");
     model.addAttribute("listCategory", categoryRepository.findAll());
     model.addAttribute("listBrand", brandRepository.findAll());
+    model.addAttribute("listColor", colorRepository.findAll());
     return "admin/index";
   }
 
   @PostMapping("/products/save")
   public String save(Product product) {
+    if (!(product.getColors() instanceof List)) {
+      product.setColors(product.getColors());
+    }
     productRepository.save(product);
     return "redirect:/admin/products";
   }

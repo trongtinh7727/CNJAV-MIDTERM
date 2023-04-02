@@ -50,6 +50,9 @@
               <div th:if="${prefix} == 'product'">
                 <div th:insert="/admin/product/table :: table"></div>
               </div>
+              <div th:if="${prefix} == 'category'">
+                <div th:insert="/admin/category/table :: table"></div>
+              </div>
               <div th:if="${prefix} == 'transaction'">
                 <div th:insert="/admin/transaction/table :: table"></div>
               </div>

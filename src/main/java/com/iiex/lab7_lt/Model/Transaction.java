@@ -1,9 +1,11 @@
 package com.iiex.lab7_lt.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Collection;
 
 import lombok.*;
+
 
 @Entity
 @Data
@@ -34,6 +36,8 @@ public class Transaction {
   // MapopedBy trỏ tới tên biến Address ở trong Person.
   @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
   @ToString.Exclude
+  @JsonIgnore
+
   private Collection<Order> orders;
 
 

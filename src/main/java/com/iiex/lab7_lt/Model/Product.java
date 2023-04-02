@@ -1,15 +1,19 @@
 package com.iiex.lab7_lt.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Table(name = "product")
 public class Product {
     @Id
@@ -18,6 +22,16 @@ public class Product {
 
     private String name;
     private float price;
+
+    public void copy(Product product) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.price = product.getPrice();
+        this.content = product.getContent();
+        this.img_links = product.getImg_links();
+        this.brand = product.getBrand();
+        this.category = product.getCategory();
+    }
 
     private String content;
 
@@ -42,9 +56,15 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL) // Quan hệ 1-n với đối tượng ở dưới (Person) (1 địa điểm có nhiều người ở)
     // MapopedBy trỏ tới tên biến Address ở trong Person.
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Collection<Order> orders;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinTable(
             name = "product_color",
             joinColumns = {

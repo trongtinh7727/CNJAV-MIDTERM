@@ -18,7 +18,8 @@
                     <th>Phương thức thanh toán</th>
                     <th>Ghi chú</th>
                     <th>Tổng hóa đơn</th>
-                    <th>Chức năng</th>
+                    <th>Thời gian tạo</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -30,15 +31,7 @@
                         <td>[[${transaction.payment}]]</td>
                         <td>[[${transaction.message}]]</td>
                         <td>[[${transaction.amount}]]</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
-                                onclick="fillEditForm(this)">Sửa
-                            </button>
-                            <button type="button" class="btn btn-danger delete" th:data-id="${transaction.id}"
-                                onclick="confirmRemoval(this)"> Xóa
-                            </button>
-                        </td>
-                        </td>
+                        <td>[[${transaction.created}]]</td>
                     </tr>
                 </th:block>
             </tbody>
@@ -50,7 +43,7 @@
                     <th>Phương thức thanh toán</th>
                     <th>Ghi chú</th>
                     <th>Tổng hóa đơn</th>
-                    <th>Chức năng</th>
+                    <th>Thời gian tạo</th>
                 </tr>
             </tfoot>
         </table>
@@ -66,6 +59,7 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+
     </script>
 
 </div>
