@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 03, 2023 at 01:34 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: db
+-- Generation Time: Apr 03, 2023 at 01:36 PM
+-- Server version: 5.7.41
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `qlbh`
+-- Database: `manager`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `brand` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`ID`, `NAME`) VALUES
+(1, 'Gucci'),
+(2, 'Louis Vuitton	'),
+(3, 'Hermès');
 
 -- --------------------------------------------------------
 
@@ -41,7 +50,17 @@ CREATE TABLE `brand` (
 CREATE TABLE `category` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`ID`, `NAME`) VALUES
+(1, 'Áo'),
+(2, 'Quần'),
+(3, 'Trang sức'),
+(4, 'Giày');
 
 -- --------------------------------------------------------
 
@@ -53,7 +72,7 @@ CREATE TABLE `color` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(50) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `color`
@@ -61,7 +80,8 @@ CREATE TABLE `color` (
 
 INSERT INTO `color` (`ID`, `NAME`, `code`) VALUES
 (1, 'Blue', '#125ce3'),
-(5, 'White', '#FFFFFF');
+(5, 'White', '#FFFFFF'),
+(6, 'Black', '#000000');
 
 -- --------------------------------------------------------
 
@@ -75,7 +95,17 @@ CREATE TABLE `order` (
   `PRODUCT_ID` int(11) NOT NULL,
   `QUANTITY` int(11) DEFAULT NULL,
   `PRICE` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`ID`, `TRANSACTION_ID`, `PRODUCT_ID`, `QUANTITY`, `PRICE`) VALUES
+(1, 2, 1, 1, 14000),
+(2, 3, 2, 2, 300000),
+(3, 3, 1, 1, 14000),
+(4, 3, 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -86,13 +116,26 @@ CREATE TABLE `order` (
 CREATE TABLE `product` (
   `ID` int(11) NOT NULL,
   `BRAND_ID` int(11) NOT NULL,
-  `CATEGORY_ID` int(11) NOT NULL DEFAULT 1,
-  `NAME` varchar(50) DEFAULT NULL,
-  `PRICE` varchar(50) DEFAULT NULL,
-  `CONTENT` varchar(50) DEFAULT NULL,
-  `IMG_LINKS` longtext DEFAULT NULL,
+  `CATEGORY_ID` int(11) NOT NULL DEFAULT '1',
+  `NAME` varchar(255) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  `CONTENT` longtext,
+  `IMG_LINKS` longtext,
   `CREATED` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`ID`, `BRAND_ID`, `CATEGORY_ID`, `NAME`, `PRICE`, `CONTENT`, `IMG_LINKS`, `CREATED`) VALUES
+(1, 1, 1, 'Áo Polo Gucci Stretch Cotton Piquet Polo With Embroidery Màu Xanh Blue', 14000, 'Áo Polo Gucci Stretch Cotton Piquet Polo With Embroidery Màu Xanh Blue', '/img/polo.jpg', NULL),
+(2, 1, 1, 'GUCCI Áo Polo Gucci With Pocket 713997 XJETR 9088 Màu Trắng', 150000, 'Áo Polo Gucci With Pocket 713997 XJETR 9088 Màu Trắng ', '/img/polo.jpg', NULL),
+(3, 2, 2, 'Quần  Louis 1', 0, 'Một chiếc quần đến từ thương hiệu nổi tiếng là Lousi Vuitton', '/img/kingsman.jpg', NULL),
+(4, 2, 2, 'Quần Louis 2', 500000, 'Một chiếc quần đến từ thương hiệu nổi tiếng là Lousi Vuitton', '/img/kingsman.jpg', NULL),
+(5, 1, 1, 'Áo Polo Gucci Stretch Cotton', 0, 'Áo Polo Gucci Stretch Cotton Piquet Polo With Embroidery Màu Xanh Blue là chiếc áo thời trang dành cho nam đến từ thương hiệu Guccl nổi tiếng.', '/img/wooyoungmi.jpg', NULL),
+(6, 1, 4, 'Giày Gucci 1', 850000, 'Giày đến từ nhà gucci', '/img/giay.jpg', NULL),
+(7, 3, 1, 'Áo Polo Gucci Stretch Cotton 3', 22241420, 'Áo Polo Gucci With Pocket 713997 XJETR 9088 Màu Trắng ', '/img/wooyoungmi.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,7 +146,21 @@ CREATE TABLE `product` (
 CREATE TABLE `product_color` (
   `COLOR_ID` int(11) NOT NULL,
   `PRODUCT_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_color`
+--
+
+INSERT INTO `product_color` (`COLOR_ID`, `PRODUCT_ID`) VALUES
+(1, 1),
+(5, 2),
+(1, 4),
+(5, 4),
+(1, 6),
+(5, 6),
+(1, 7),
+(5, 7);
 
 -- --------------------------------------------------------
 
@@ -114,7 +171,7 @@ CREATE TABLE `product_color` (
 CREATE TABLE `role` (
   `ID` int(11) NOT NULL,
   `NAME` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `role`
@@ -133,12 +190,21 @@ INSERT INTO `role` (`ID`, `NAME`) VALUES
 CREATE TABLE `transaction` (
   `ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
-  `STATUS` int(11) DEFAULT 0,
+  `STATUS` int(11) DEFAULT '0',
   `AMOUNT` double DEFAULT NULL,
   `PAYMENT` varchar(50) DEFAULT NULL,
   `MESSAGE` varchar(50) DEFAULT NULL,
   `CREATED` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`ID`, `USER_ID`, `STATUS`, `AMOUNT`, `PAYMENT`, `MESSAGE`, `CREATED`) VALUES
+(2, 3, 1, 14000, 'cod', 'Lê Văn Sỹ, Q3, TP HCM', '2023-04-03 06:50:15'),
+(3, 3, 0, 314000, 'cod', 'null', '2023-04-03 06:50:42'),
+(5, 2, 0, 0, 'cod', 'null', '2023-04-03 15:32:42');
 
 -- --------------------------------------------------------
 
@@ -153,7 +219,7 @@ CREATE TABLE `user` (
   `ADDRESS` varchar(50) DEFAULT NULL,
   `PASSWORD` varchar(254) DEFAULT NULL,
   `CREATED` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
@@ -173,7 +239,7 @@ INSERT INTO `user` (`ID`, `NAME`, `EMAIL`, `ADDRESS`, `PASSWORD`, `CREATED`) VAL
 CREATE TABLE `users_roles` (
   `USER_ID` int(11) NOT NULL,
   `ROLE_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_roles`
@@ -264,49 +330,49 @@ ALTER TABLE `users_roles`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

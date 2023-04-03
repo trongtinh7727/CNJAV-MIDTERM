@@ -107,17 +107,22 @@ Additon:
 ### Installation
 
 1. Run Docker Engine
-2. Run compose
+2. Run compose at the root of project
    ```sh
    docker-compose up -d
    ```
 3. Import database: 
-- Go to phpMyAdmin at `http://localhost:8888` with username/password: root/admin
+- Go to phpMyAdmin at `http://localhost:8090` with username/password: root/admin
 - Chosse database name `manager` and import `data.sql`
 4. Open the project in an IDE such as Eclipse or IntelliJ.
 5. Build the project using Maven or your IDE's build tools.
 6. Run the main class (`Application`).
 7. Open a web browser and go to `http://localhost:8080`.
+8. To close this app. Stop project from IDE and run this cmd at the root of project
+```sh
+   docker-compose down
+```
+
 <p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
 
