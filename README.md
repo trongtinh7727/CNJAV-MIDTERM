@@ -142,47 +142,47 @@ Flow activity diagram [here](./Docs/Activity%20diagram/)
 
 <p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
+# Entity-relationship diagram:
+![erd][erd]
 
 # APIs:
     
 ## Order
+### GET /api/orders
+![getAllOrder][getAllOrder]
+
+### GET /api/orders/{id}
+![getOrder][getOrder]
+
+### POST /api/orders
+![addOrder][addOrder]
+
 ### PUT /api/orders/{id}
+![updateOrder][updateOrder]
 
-```
-curl --location --request PUT 'http://localhost:8080/api/orders/{id}' \
---header 'Content-Type: application/json' \
---data-raw '{.3
-    "price": 20.0,
-    "quantity": 20,
-}'
-
-```
 ### DELETE /api/orders/{id}
+![deleteOrder][deleteOrder]
 
-```
-curl --location --request DELETE 'http://localhost:8080/api/orders/{id}' \
---header 'Content-Type: application/json'
-```
 
 ## Product
 
 ### GET /api/products
 
-```
-curl --location --request GET 'http://localhost:8080/api/products' \
---header 'Content-Type: application/json'
-```
+![getAllProduct][getAllProduct]
 
 ### GET /api/products/{id}
-```
-curl --location --request GET 'http://localhost:8080/api/products/{id}' \
---header 'Content-Type: application/json'
-```
+![getProduct][getProduct]
 
-### GET /api/products/filter
+### GET /api/products/{id}
+![getProduct][getProduct]
+
+### POST /api/products
+![addProduct][addProduct]
+
+### PUT /api/products/filter
+![updateProduct][updateProduct]
 
 Request Parameters:
-
 
 | Parameter	| Type	| Description| 
 |:-----------:|:-------:|------------|
@@ -192,13 +192,9 @@ Request Parameters:
 | minPrice	| int	| The minimum price to filter by| 
 | maxPrice	| int	| The maximum price to filter by| 
 
-```
-curl --location --request GET 'http://localhost:8080//api/products/filter?category={category}&brand={brand}&minPrice={minPrice}&maxPrice={maxPrice}&colors={color1}&colors={color2}' \
---header 'Content-Type: application/json'
-```
+![filterProduct][filterProduct]
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [Spring.io]: https://img.shields.io/badge/SpringBoot-white?style=for-the-badge&logo=spring&logoColor=green
 [Spring-url]: https://spring.io/
 
@@ -212,4 +208,16 @@ curl --location --request GET 'http://localhost:8080//api/products/filter?catego
 [Bootstrap-url]: https://getbootstrap.com
 
 
+[getAllProduct]: ./Docs/APIs/Product/getAllProduct.png
+[getProduct]: ./Docs/APIs/Product/getAProduct.png
+[addProduct]: ./Docs/APIs/Product/AddProduct.png
+[updateProduct]: ./Docs/APIs/Product/UpdateProduct.png
+[filterProduct]: ./Docs/APIs/Product/filter.png
+
+[getAllOrder]: ./Docs/APIs/Order/getAll.png
+[getOrder]: ./Docs/APIs/Order/getAOrder.png
+[addOrder]: ./Docs/APIs/Order/AddOrder.png
+[updateOrder]: ./Docs/APIs/Order/UpdateOrder.png
+[deleteOrder]: ./Docs/APIs/Order/deleteOrder.png
+[erd]: ./Docs/ERD/ERD.png
 

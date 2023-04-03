@@ -22,13 +22,10 @@ public class Product {
     private double price;
 
     public void copy(Product product) {
-        this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
         this.content = product.getContent();
         this.img_links = product.getImg_links();
-        this.brand = product.getBrand();
-        this.category = product.getCategory();
     }
 
     private String content;

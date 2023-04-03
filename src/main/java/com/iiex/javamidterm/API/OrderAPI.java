@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderAPI {
@@ -30,8 +32,13 @@ public class OrderAPI {
   @Autowired
   private UserServiceImpl userService;
 
+  @GetMapping("/")
+  public List<Order> getAll() {
+    return orderRepository.findAll();
+  }
+
   @GetMapping("/{id}")
-  public Order addItem(@PathVariable("id") Integer id) {
+  public Order getItem(@PathVariable("id") Integer id) {
     return orderRepository.findById(id).get();
   }
 
