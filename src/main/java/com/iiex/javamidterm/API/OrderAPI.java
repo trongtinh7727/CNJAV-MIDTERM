@@ -8,7 +8,9 @@ import com.iiex.javamidterm.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +30,26 @@ public class OrderAPI {
   @Autowired
   private UserServiceImpl userService;
 
+  @GetMapping("/{id}")
+  public Order addItem(@PathVariable("id") Integer id) {
+    return orderRepository.findById(id).get();
+  }
+
+  @PostMapping
+  public Order createorder(@RequestBody Order order) {
+    return orderRepository.save(order);
+  }
+
   @PutMapping("/{id}")
   public Order updateOrder(@PathVariable int id, @RequestBody Order orderData) {
     Transaction transaction = userService.getTransaction();
     return orderRepository
       .findById(id)
       .map(order -> {
-        transaction.setAmount(transaction.getAmount()-order.getPrice());
+        transaction.setAmount(transaction.getAmount() - order.getPrice());
         order.setQuantity(orderData.getQuantity());
         order.setPrice(orderData.getPrice());
-        transaction.setAmount(transaction.getAmount()+order.getPrice());
+        transaction.setAmount(transaction.getAmount() + order.getPrice());
         transactionRepository.saveAndFlush(transaction);
         return orderRepository.saveAndFlush(order);
       })

@@ -93,6 +93,9 @@ The code for the application is organized into the following packages:
 - `com.iiex.javamidterm.Security`: Contains the class to config `spring security` of the application.
 - `com.iiex.javamidterm.Service`: Contains the service classes for the application.
 
+Additon: 
+- `Docs.ERD`: Contains the Entity-relationship diagram for the database
+- `Docs.Activity-diagram`: Contains the Entity-relationship diagram for the database
 
 ## Running the Application
 
