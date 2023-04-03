@@ -216,8 +216,8 @@ Request Parameters:
 
 [getAllOrder]: ./Docs/APIs/Order/getAll.png
 [getOrder]: ./Docs/APIs/Order/getAOrder.png
-[addOrder]: ./Docs/APIs/Order/AddOrder.png
-[updateOrder]: ./Docs/APIs/Order/UpdateOrder.png
+[addOrder]: ./Docs/APIs/Order/addOrder.png
+[updateOrder]: ./Docs/APIs/Order/updateOrder.png
 [deleteOrder]: ./Docs/APIs/Order/deleteOrder.png
 [erd]: ./Docs/ERD/ERD.png
 
