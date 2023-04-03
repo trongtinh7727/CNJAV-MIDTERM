@@ -29,12 +29,7 @@
             <div class="container">
                 <div class="col-md-4 content-center">
                     <div class="card card-login card-plain">
-                        <form
-                                method="post"
-                                role="form"
-                                th:action="@{/login}"
-                                class="form-horizontal"
-                        >
+                        <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
                             <div class="card-header text-center">
                                 <div class="logo-container">
                                     <img src="../assets/img/now-logo.png" alt="">
@@ -45,30 +40,23 @@
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons users_circle-08"></i>
                                     </span>
-                                    <input type="text"
-                                           id="username"
-                                           name="username"
-                                           class="form-control"
-                                           placeholder="Enter email address"
-                                           >
+                                    <input type="text" id="username" name="username" class="form-control"
+                                        placeholder="Enter email address">
                                 </div>
                                 <div class="input-group form-group-no-border input-lg">
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons text_caps-small"></i>
                                     </span>
-                                    <input type="password"
-                                           id="password"
-                                           name="password"
-                                           class="form-control"
-                                           placeholder="Enter password">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Enter password">
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block" >Submit</button>
+                                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Submit</button>
                             </div>
                             <div class="pull-left">
                                 <h6>
-                                    <a href="#pablo" class="link footer-link">Create Account</a>
+                                    <a href="./register" class="link footer-link">Create Account</a>
                                 </h6>
                             </div>
 

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.iiex</groupId>
-    <artifactId>Lab7_LT</artifactId>
+    <artifactId>javamidterm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Lab7_LT</name>
-    <description>Lab7_LT</description>
+    <name>javamidterm</name>
+    <description>javamidterm</description>
     <properties>
         <java.version>19</java.version>
         <spring-security.version>6.0.2</spring-security.version>

@@ -20,15 +20,14 @@
                     <th>Mô tả</th>
                     <th>Ảnh</th>
                     <th>Màu</th>
-
                     <th>Chức năng</th>
                 </tr>
             </thead>
             <tbody>
                 <th:block th:each="product : ${productList}">
                     <tr>
-                        <td>[[${product.id}]]</td>
-                        <td>[[${product.name}]]</td>
+                        <td class="pID">[[${product.id}]]</td>
+                        <td th:id="'p'+ ${product.id}">[[${product.name}]]</td>
                         <td>[[${product.category.name}]]</td>
                         <td>[[${product.brand.name}]]</td>
                         <td>[[${product.price}]]</td>
@@ -42,8 +41,8 @@
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal"
-                                onclick="fillEditForm(this)">Sửa
+                            <button type="button" class="btn btn-primary" th:data-id="${product.id}" data-toggle="modal"
+                                data-target="#updateModal" onclick="fillEditForm(this)">Sửa
                             </button>
                             <button type="button" class="btn btn-danger delete" th:data-id="${product.id}"
                                 onclick="confirmRemoval(this)"> Xóa
@@ -233,8 +232,9 @@
     </script>
     <script>
         function fillEditForm(btn) {
-            let tds = $(btn).closest('tr').find('td')
-            let id = tds[0].innerHTML;
+
+            // let tds = $(btn).closest('tr').find('td')
+            let id = $(btn).attr('data-id');
             $("#action").val(id);
             $.get("../api/products/" + id, {
             }, function (data, status) {
@@ -248,11 +248,12 @@
         }
 
         function confirmRemoval(btn) {
-            let tds = $(btn).closest('tr').find('td')
-            document.getElementById("producer-name").innerHTML = tds[1].innerText;
+            let id = $(btn).attr('data-id');
+            let tds = document.getElementById('p' + id)
+            document.getElementById("producer-name").innerHTML = tds.innerText;
             // $('#delete-button').attr('uid', tds[0].innerHTML);
             $('#confirm-removal-modal').modal({ show: true });
-            $("#a-delete").attr("href", "products/delete/" + tds[0].innerText);
+            $("#a-delete").attr("href", "products/delete/" + id);
         }
 
     </script>

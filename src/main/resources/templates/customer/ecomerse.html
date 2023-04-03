@@ -26,97 +26,169 @@
                 <div class="container">
                     <h2 class="section-title">Find what you need</h2>
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="collapse-panel">
-                                <div class="card-body">
-                                </div>
-                                <div class="card card-refine card-plain">
-                                    <div class="card-header" role="tab" id="headingTwo">
-                                        <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Category
-                                                <i class="now-ui-icons arrows-1_minimal-down"></i>
-                                            </a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                        <div class="card-body">
+                        <div class="filter-bar">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <select class="form-control" id="category" name="category">
+                                            <option value="">Tất cả</option>
                                             <th:block th:each="category : ${listCategory}">
-                                                <div class="checkbox">
-                                                    <input th:id="${category.id}" type="checkbox">
-                                                    <label for="${category.id}">
-                                                        [[${category.name}]]
-                                                    </label>
-                                                </div>
+                                                <option th:value="${category.id}" th:text="${category.name}">
+                                                </option>
                                             </th:block>
-                                        </div>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="card card-refine card-plain">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapseThree" aria-expanded="false"
-                                                aria-controls="collapseThree">
-                                                Brand
-                                                <i class="now-ui-icons arrows-1_minimal-down"></i>
-                                            </a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" role="tabpanel"
-                                        aria-labelledby="headingThree">
-                                        <div class="card-body">
-                                            <div class="checkbox">
-                                                <input id="checkbox9" type="checkbox">
-                                                <label for="checkbox9">
-                                                    All
-                                                </label>
-                                            </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="brand">Brand</label>
+                                        <select class="form-control" id="brand" name="brand">
+                                            <option value="">Tất cả</option>
                                             <th:block th:each="brand : ${listBrand}">
-                                                <div class="checkbox">
-                                                    <input th:id="${brand.id}" type="checkbox">
-                                                    <label for="${brand.id}">
-                                                        [[${brand.name}]]
-                                                    </label>
-                                                </div>
+                                                <option th:value="${brand.id}" th:text="${brand.name}">
+                                                </option>
                                             </th:block>
-                                        </div>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="card card-refine card-plain">
-                                    <div class="card-header" role="tab" id="headingfour">
-                                        <h6 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-                                                Colour
-                                                <i class="now-ui-icons arrows-1_minimal-down"></i>
-                                            </a>
-                                        </h6>
-                                    </div>
-                                    <div id="collapsefour" class="collapse" role="tabpanel"
-                                        aria-labelledby="headingfour">
-                                        <div class="card-body">
-                                            <div class="checkbox">
-                                                <input id="checkbox27" type="checkbox">
-                                                <label for="checkbox27">
-                                                    All
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <input id="checkbox28" type="checkbox">
-                                                <label for="checkbox28">
-                                                    Black
-                                                </label>
-                                            </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="color">Color</label>
+                                        <div th:each="color : ${listColors}">
+                                            <input type="checkbox" th:id="${'color-' + color.name}"
+                                                th:value="${color.id}">
+                                            <label th:for="${'color-' + color.name}" th:text="${color.name}"></label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="minPrice">Giá thấp nhât</label>
+                                        <input type="text" id="minPrice" name="minPrice" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="maxPrice">Giá cao nhất</label>
+                                        <input type="text" id="maxPrice" name="maxPrice" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" onclick="filterProducts()"
+                                        class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+                    <script>
+
+                        // Define the filter function
+                        function filterProducts() {
+                            const category = document.querySelector('#category').value;
+                            const brand = document.querySelector('#brand').value;
+                            const minPrice = document.querySelector('#minPrice').value;
+                            const maxPrice = document.querySelector('#maxPrice').value;
+                            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+                            // Create an array to store the checked values
+                            const checkedValues = [];
+
+                            // Loop through the checkboxes and check if it is checked
+                            checkboxes.forEach((checkbox) => {
+                                if (checkbox.checked) {
+                                    checkedValues.push(checkbox.value);
+                                }
+                            });
+                            console.log(checkedValues)
+                            var colors = ''
+                            var prefix = '&colors='
+                            checkedValues.forEach(checkedVal => {
+                                colors += prefix + checkedVal;
+                            })
+                            console.log(colors);
+
+                            const url = `./api/products/filter?category=${category}&brand=${brand}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+
+                            fetch(url + colors)
+                                .then(response => {
+                                    if (response.ok) {
+                                        return response.json();
+                                    } else {
+                                        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                                    }
+                                })
+                                .then(data => {
+                                    console.log(data)
+                                    const row = document.querySelector('#pdata');
+                                    row.innerHTML = '';
+                                    data.forEach(product => {
+                                        const col = document.createElement('div');
+                                        col.className = 'col-lg-4 col-md-6';
+                                        const card = document.createElement('div');
+                                        card.className = 'card card-product card-plain';
+
+                                        const cardImage = document.createElement('div');
+                                        cardImage.className = 'card-image';
+
+                                        const link = document.createElement('a');
+                                        link.href = `/product?id=${product.id}`;
+
+                                        const img = document.createElement('img');
+                                        img.src = product.img_links;
+                                        img.alt = '';
+
+                                        const cardBody = document.createElement('div');
+                                        cardBody.className = 'card-body';
+
+                                        const titleLink = document.createElement('a');
+                                        titleLink.href = `/product?id=${product.id}`;
+
+                                        const title = document.createElement('h4');
+                                        title.className = 'card-title';
+                                        title.innerText = product.name;
+
+                                        const desc = document.createElement('p');
+                                        desc.className = 'card-description';
+                                        desc.innerText = product.content;
+
+                                        const cardFooter = document.createElement('div');
+                                        cardFooter.className = 'card-footer';
+
+                                        const priceContainer = document.createElement('div');
+                                        priceContainer.className = 'price-container';
+
+                                        const price = document.createElement('span');
+                                        price.className = 'price';
+                                        price.innerText = `€ ${product.price}`;
+
+                                        link.appendChild(img);
+                                        cardImage.appendChild(link);
+                                        titleLink.appendChild(title);
+                                        cardBody.appendChild(titleLink);
+                                        cardBody.appendChild(desc);
+                                        priceContainer.appendChild(price);
+                                        cardFooter.appendChild(priceContainer);
+                                        card.appendChild(cardImage);
+                                        card.appendChild(cardBody);
+                                        card.appendChild(cardFooter);
+                                        col.appendChild(card);
+                                        row.appendChild(col);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        }
+                    </script>
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row" id="pdata">
                             <th:block th:each="product : ${productList}">
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card card-product card-plain">
@@ -139,7 +211,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end card -->
                                 </div>
                             </th:block>
                         </div>
