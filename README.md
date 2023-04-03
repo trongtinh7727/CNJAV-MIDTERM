@@ -34,13 +34,13 @@
       </ul>
     </li>
     <li>
-      <a href="#software-development-principles,-patterns, and-practices">Software Development Principles, Patterns, and Practices</a>
+      <a href="#software-development-principles-patterns-and-practices">Software Development Principles, Patterns, and Practices</a>
     </li>
     <li>
-      <a href="#code-tructure">Code Structure</a>
+      <a href="#code-structure">Code Structure</a>
     </li>
     <li>
-      <a href="#getting-started">Running the Application</a>
+      <a href="#running-the-application">Running the Application</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -48,7 +48,7 @@
       </ul>
     </li>
     <li>
-      <a href="#apis:">APIs:</a>
+      <a href="#apis">APIs:</a>
     </li>
   </ol>
 </details>
@@ -59,7 +59,7 @@
 ## About The Project
 This is a web application that allows users to browse a catalog of products and filter them by category, brand, color, and price range. It was built using Java, Spring Boot, Thymeleaf, and Bootstrap.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
 
 
@@ -70,7 +70,7 @@ This is a web application that allows users to browse a catalog of products and 
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
 ## Software Development Principles, Patterns, and Practices
 
@@ -115,7 +115,7 @@ The code for the application is organized into the following packages:
 5. Build the project using Maven or your IDE's build tools.
 6. Run the main class (`Application`).
 7. Open a web browser and go to `http://localhost:8080`.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
 
 
@@ -132,7 +132,7 @@ Customer page: `/`
 Flow activity diagram [here](./Docs/Activity%20diagram/)
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
 
 # APIs:
